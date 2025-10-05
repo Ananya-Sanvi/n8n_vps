@@ -4,10 +4,13 @@ This guide provides step-by-step instructions to self-host n8n, a free and open-
 Step 1: Installing Docker
 Update the Package Index:
 sudo apt update
+
 Install Docker:
 sudo apt install docker.io
+
 Start Docker:
 sudo systemctl start docker
+
 Enable Docker to Start at Boot:
 sudo systemctl enable docker
 
@@ -32,6 +35,7 @@ Or if you are using a subdomain, it should look like this:
     -e WEBHOOK_URL="https://subdomain.your-domain.com/" \
     -v ~/.n8n:/root/.n8n \
     n8nio/n8n
+    
 This command does the following:
 
 Downloads and runs the n8n Docker image.
@@ -39,17 +43,20 @@ Exposes n8n on port 5678.
 Sets environment variables for the n8n host and webhook tunnel URL.
 Mounts the n8n data directory for persistent storage.
 After executing the command, n8n will be accessible on your-domain.com:5678.
+
 Step 3: Installing Nginx
 Nginx is used as a reverse proxy to forward requests to n8n and handle SSL termination.
 
 Install Nginx:
 sudo apt install nginx
+
 Step 4: Configuring Nginx
 Configure Nginx to reverse proxy the n8n web interface:
 
 Create a New Nginx Configuration File:
 
 sudo nano /etc/nginx/sites-available/n8n.conf
+
 Paste the Following Configuration:
 
 server {
@@ -76,15 +83,18 @@ Replace your-domain.com with your actual domain.
 Enable the Configuration:
 
 sudo ln -s /etc/nginx/sites-available/n8n.conf /etc/nginx/sites-enabled/
+
 Test the Nginx Configuration and Restart:
 
 sudo nginx -t
 sudo systemctl restart nginx
+
 Step 5: Setting up SSL with Certbot
 Certbot will obtain and install an SSL certificate from Let's Encrypt.
 
 Install Certbot and the Nginx Plugin:
 sudo apt install certbot python3-certbot-nginx
+
 Obtain an SSL Certificate:
 sudo certbot --nginx -d your-domain.com
 // If you have a subdomain then it will be subdomain.your-domain.com
