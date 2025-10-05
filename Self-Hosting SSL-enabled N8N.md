@@ -61,8 +61,7 @@ Paste the Following Configuration:
 
 server {
     listen 80;
-    server_name your-domain.com; // subdomain.your-domain.com if you have a subdomain
-
+    server_name your-domain.com; 
     location / {
     proxy_pass http://localhost:5678;
     proxy_http_version 1.1;
