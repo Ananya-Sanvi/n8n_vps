@@ -77,6 +77,7 @@ server {
     proxy_read_timeout 86400;
     }
 }
+
 Replace your-domain.com with your actual domain.
 
 Enable the Configuration:
